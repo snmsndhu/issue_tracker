@@ -2,6 +2,7 @@
 import { Button, TextField } from "@radix-ui/themes";
 import SimpleMDE from "react-simplemde-editor";
 import { useForm, Controller } from "react-hook-form";
+import axios from "axios";
 import "easymde/dist/easymde.min.css";
 
 interface IssueForm {
@@ -12,7 +13,10 @@ interface IssueForm {
 const NewIssuePage = () => {
   const { register, control, handleSubmit } = useForm<IssueForm>();
   return (
-    <div className="max-w-xl space-y-3">
+    <form
+      className="max-w-xl space-y-3"
+      onSubmit={handleSubmit((data) => console.log(data))}
+    >
       <TextField.Root>
         <TextField.Input placeholder="Title" {...register("title")} />
       </TextField.Root>
@@ -24,7 +28,7 @@ const NewIssuePage = () => {
         )}
       />
       <Button>Submit New Issue</Button>
-    </div>
+    </form>
   );
 };
 
