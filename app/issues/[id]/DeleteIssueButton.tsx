@@ -30,6 +30,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
                 color="red"
                 onClick={async () => {
                   try {
+                    throw new Error();
                     await axios.delete("/api/issues/" + issueId);
                     router.push("/issues");
                     router.refresh();
@@ -50,7 +51,12 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
           <AlertDialog.Description>
             This issue could not be deleted
           </AlertDialog.Description>
-          <Button color="gray" variant="soft">
+          <Button
+            color="gray"
+            variant="soft"
+            mt="2"
+            onClick={() => setError(false)}
+          >
             OK
           </Button>
         </AlertDialog.Content>
