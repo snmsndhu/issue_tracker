@@ -62,9 +62,11 @@ const NavBar = () => {
                   <DropdownMenu.Label>
                     <Text size="2"> {session.user!.email}</Text>
                   </DropdownMenu.Label>
+                  <DropdownMenu.Item>
+                    <Link href="/api/auth/signout">Sign Out</Link>
+                  </DropdownMenu.Item>
                 </DropdownMenu.Content>
               </DropdownMenu.Root>
-              //<Link href="/api/auth/signout">Sign Out</Link>
             )}
             {status === "unauthenticated" && (
               <Link href="/api/auth/signin">Login</Link>
