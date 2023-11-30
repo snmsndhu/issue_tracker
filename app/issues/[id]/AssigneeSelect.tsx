@@ -5,8 +5,9 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Skeleton } from "@/app/components";
+import { Issue } from "@prisma/client";
 
-const AssigneeSelect = () => {
+const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   const {
     data: users,
     error,
@@ -20,7 +21,11 @@ const AssigneeSelect = () => {
   if (isLoading) return <Skeleton />;
   if (error) return null;
   return (
-    <Select.Root>
+    <Select.Root
+      onValueChange={(userId) => {
+        axios.patch("/api/issues/" + issue.id, { assignedToUserId: userId });
+      }}
+    >
       <Select.Trigger placeholder="Assign..." />
       <Select.Content>
         <Select.Group>
