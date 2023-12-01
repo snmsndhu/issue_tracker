@@ -1,4 +1,5 @@
 "use client";
+
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
 import { issueSchema } from "@/app/validationSchema";
@@ -15,7 +16,7 @@ import { z } from "zod";
 
 type IssueFormData = z.infer<typeof issueSchema>;
 
-const IssueForm = async ({ issue }: { issue?: Issue }) => {
+const IssueForm = ({ issue }: { issue?: Issue }) => {
   const router = useRouter();
   const {
     register,
@@ -33,13 +34,14 @@ const IssueForm = async ({ issue }: { issue?: Issue }) => {
       setSubmitting(true);
       if (issue) await axios.patch("/api/issues/" + issue.id, data);
       else await axios.post("/api/issues", data);
-      router.push("/issue/list");
+      router.push("/issues/list");
       router.refresh();
     } catch (error) {
       setSubmitting(false);
-      setError("An unexpected error occurred");
+      setError("An unexpected error occurred.");
     }
   });
+
   return (
     <div className="max-w-xl">
       {error && (
@@ -47,7 +49,7 @@ const IssueForm = async ({ issue }: { issue?: Issue }) => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <form className=" space-y-3" onSubmit={onSubmit}>
+      <form className="space-y-3" onSubmit={onSubmit}>
         <TextField.Root>
           <TextField.Input
             defaultValue={issue?.title}
@@ -61,15 +63,12 @@ const IssueForm = async ({ issue }: { issue?: Issue }) => {
           control={control}
           defaultValue={issue?.description}
           render={({ field }) => (
-            <SimpleMDE placeholder="description" {...field} />
+            <SimpleMDE placeholder="Description" {...field} />
           )}
         />
-
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
-
         <Button disabled={isSubmitting}>
-          {issue ? "Update Issue" : "Submit New Issue"}
-          {""}
+          {issue ? "Update Issue" : "Submit New Issue"}{" "}
           {isSubmitting && <Spinner />}
         </Button>
       </form>

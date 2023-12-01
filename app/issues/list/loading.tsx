@@ -1,12 +1,13 @@
 import { Skeleton } from "@/app/components";
 import { Table } from "@radix-ui/themes";
-import IssueAction from "./IssueAction";
+import IssueActions from "./IssueActions";
 
-const LoadingIssuePage = () => {
+const LoadingIssuesPage = () => {
   const issues = [1, 2, 3, 4, 5];
+
   return (
     <div>
-      <IssueAction />
+      <IssueActions />
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
@@ -20,8 +21,8 @@ const LoadingIssuePage = () => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {issues.map((issues) => (
-            <Table.Row key={issues}>
+          {issues.map((issue) => (
+            <Table.Row key={issue}>
               <Table.Cell>
                 <Skeleton />
                 <div className="block md:hidden">
@@ -42,4 +43,4 @@ const LoadingIssuePage = () => {
   );
 };
 
-export default LoadingIssuePage;
+export default LoadingIssuesPage;
