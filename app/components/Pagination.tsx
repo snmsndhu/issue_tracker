@@ -1,4 +1,9 @@
-import { ChevronLeftIcon, DoubleArrowLeftIcon } from "@radix-ui/react-icons";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  DoubleArrowLeftIcon,
+  DoubleArrowRightIcon,
+} from "@radix-ui/react-icons";
 import { Button, Flex, Text } from "@radix-ui/themes";
 import React from "react";
 
@@ -14,7 +19,7 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
 
   return (
     <Flex align="center" gap="2">
-      <Text>
+      <Text size="2">
         Page {currentPage} of {pageCount}
       </Text>
       <Button color="gray" variant="soft" disabled={currentPage === 1}>
@@ -22,6 +27,16 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
       </Button>
       <Button color="gray" variant="soft" disabled={currentPage === 1}>
         <ChevronLeftIcon />
+      </Button>
+      <Button color="gray" variant="soft" disabled={currentPage === pageCount}>
+        <ChevronRightIcon />
+        <Button
+          color="gray"
+          variant="soft"
+          disabled={currentPage === pageCount}
+        >
+          <DoubleArrowRightIcon />
+        </Button>
       </Button>
     </Flex>
   );
