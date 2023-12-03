@@ -43,47 +43,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
   return (
     <div>
       <IssueActions />
-      <Table.Root variant="surface">
-        <Table.Header>
-          <Table.Row>
-            {columns.map((columns) => (
-              <Table.ColumnHeaderCell
-                key={columns.value}
-                className={columns.className}
-              >
-                <NextLink
-                  href={{
-                    query: { ...searchParams, orderBy: columns.value },
-                  }}
-                >
-                  {columns.label}
-                </NextLink>
-                {columns.value === searchParams.orderBy && (
-                  <ArrowUpIcon className="inline" />
-                )}
-              </Table.ColumnHeaderCell>
-            ))}
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {issues.map((issue) => (
-            <Table.Row key={issue.id}>
-              <Table.Cell>
-                <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
-                <div className="block md:hidden">
-                  <IssueStatusBadge status={issue.status} />
-                </div>
-              </Table.Cell>
-              <Table.Cell className="hidden md:table-cell">
-                <IssueStatusBadge status={issue.status} />
-              </Table.Cell>
-              <Table.Cell className="hidden md:table-cell">
-                {issue.createdAt.toDateString()}
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table.Root>
+
       <Pagination
         pageSize={pageSize}
         currentPage={page}
