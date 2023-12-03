@@ -1,10 +1,25 @@
 import { IssueStatusBadge } from "@/app/components";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
+import NextLink from "next/link";
 import { Table } from "@radix-ui/themes";
 import Link from "next/link";
 import React from "react";
+import { Issue, Status } from "@prisma/client";
 
-const IssueTable = () => {
+interface Props {
+  searchParams: { status: Status; orderBy: keyof Issue; page: string };
+  issues: Issue;
+}
+const IssueTable = ({ searchParams, issues }: Props) => {
+  const columns: { label: string; value: keyof Issue; className?: string }[] = [
+    { label: "Issue", value: "title" },
+    { label: "Status", value: "status", className: "hidden md:table-cell" },
+    {
+      label: "Created",
+      value: "createdAt",
+      className: "hidden md:table-cell",
+    },
+  ];
   return (
     <Table.Root variant="surface">
       <Table.Header>
